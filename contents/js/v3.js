@@ -20,6 +20,7 @@ var total_tabla_resumen_a=0;
 var total_tabla_resumen_terceros=0;
 var mpago;
 let info_alum
+let base_url = window.location.origin;
 
 $(document).ready(function() {
 	
@@ -129,7 +130,7 @@ if($('#step_2_form').length > 0){
 				region_f=region.split('_');
 				
 		 $.ajax({
-                url :'https://ficha.claseejecutiva.com/index.php/controller/get_comuna',
+                url :base_url+'/index.php/controller/get_comuna',
                 type : "POST",
                 data :{id_comuna:region_f[1]},
                 success: function(data){		
@@ -224,7 +225,7 @@ $('#step_1_sgte').click(function() {
       submitHandler: function(form){
 	  			$.ajax({
 				data: $('#step_1_form').serialize(),
-				url : 'https://ficha.claseejecutiva.com/index.php/controller/step_1',
+				url : base_url+'/index.php/controller/step_1',
 				type : 'POST',
 				success : function(html){
 					respuesta = JSON.parse(html);
@@ -276,7 +277,7 @@ $('#step_2_sgte').click(function() {//function(){$('#id_otro_cheque_nombre').val
       submitHandler: function(form){
 	  			$.ajax({
 				data: $('#step_2_form').serialize(),
-				url : 'https://ficha.claseejecutiva.com/index.php/controller/step_2',
+				url : base_url+'/index.php/controller/step_2',
 				type : 'POST',
 				success : function(html){
 					respuesta = JSON.parse(html);
@@ -358,7 +359,7 @@ return false;
           ignore: "ignore",
 		  errorElement: "span",
 		  submitHandler: function(form){
-		  var formUrl = "https://ficha.claseejecutiva.com/index.php/controller/do_upload";
+		  var formUrl = base_url+"/index.php/controller/do_upload";
 	      var formData = new FormData($('#step_4_form')[0]);
 	      var percent = $('.percent');
 		  var status = $('#status');
@@ -400,7 +401,7 @@ return false;
 				 $('#step_4_enviar').prop('disabled', true);
 				if(respuesta.status=='ok'){
 					//alert('Datos Ingresado Correctamente');
-					enviar_form($('#step_4_form').serialize(),'https://ficha.claseejecutiva.com/index.php/controller/step_4');
+					enviar_form($('#step_4_form').serialize(),base_url+'/index.php/controller/step_4');
 					$('#modalErrorlLabel').html('Exito');	
                     $('#body-modalError').html('Su Postulacion ha Finalizado exitosamente<br>En breve enviaremos un correo de confirmacion ');
                     $('#open-error').click();	
@@ -644,7 +645,7 @@ function malla_diplo(sku){
 var sku=sku;	
 
  $.ajax({
-                url :'https://ficha.claseejecutiva.com/index.php/controller/malla?idOp='+sku,
+                url :base_url+'/index.php/controller/malla?idOp='+sku,
                 type : "GET",
                 data :sku,
                 success: function(data){
@@ -739,13 +740,13 @@ function back_step(step){
 	  case 1:
 	  // enviar_back('step_1',$('#idOp_step_1').val());
 	  // window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_1').val();
-      $.post('https://ficha.claseejecutiva.com/index.php/controller/back_step', {"step": "step_1","idOp": $('#idOp_step_1').val()},function(data) {   window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_1').val();})	   	  
+      $.post(base_url+'/index.php/controller/back_step', {"step": "step_1","idOp": $('#idOp_step_1').val()},function(data) {   window.location.href = base_url+'/?idOp='+$('#idOp_step_1').val();})	   	  
 	   window.location.reload(true);	  
 	  break;
 			
 	  case 2:
 	   //enviar_back('step_2',$('#idOp_step_2').val());
-	 $.post('https://ficha.claseejecutiva.com/index.php/controller/back_step', {"step": "step_2","idOp": $('#idOp_step_2').val()},function(data) {   window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_2').val();})	   
+	 $.post(base_url+'/index.php/controller/back_step', {"step": "step_2","idOp": $('#idOp_step_2').val()},function(data) {   window.location.href = base_url+'/?idOp='+$('#idOp_step_2').val();})	   
 	  window.location.reload(true);
 	  break;
 		
@@ -754,21 +755,21 @@ function back_step(step){
 	  step='step_2';
       //enviar_back('step_3',$('#idOp_step_3').val());
 	 // window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_3').val();
-      $.post('https://ficha.claseejecutiva.com/index.php/controller/back_step', {"step": "step_3","idOp": $('#idOp_step_3').val()},function(data) {   window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_3').val();})	   	  	 
+      $.post(base_url+'/index.php/controller/back_step', {"step": "step_3","idOp": $('#idOp_step_3').val()},function(data) {   window.location.href = base_url+'/?idOp='+$('#idOp_step_3').val();})	   	  	 
 	  window.location.reload(true);
 	  break;
 
 	  case 4:
 	  //window.location.reload(true);
 	  step='step_2';
-      $.post('https://ficha.claseejecutiva.com/index.php/controller/back_step', {"step": "step_3","idOp": $('#idOp_step_4').val()},function(data) {   window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_4').val();})	   	  	 	  
+      $.post(base_url+'/index.php/controller/back_step', {"step": "step_3","idOp": $('#idOp_step_4').val()},function(data) {   window.location.href = base_url+'/?idOp='+$('#idOp_step_4').val();})	   	  	 	  
       //enviar_back('step_3',$('#idOp_step_4').val());
 	  //window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_4').val();
 	  //window.location.reload(true);
 	  break;
 	  
 	  case 5:
-	  window.location.href = 'https://ficha.claseejecutiva.com/?idOp='+$('#idOp_step_3').val();
+	  window.location.href = base_url+'/?idOp='+$('#idOp_step_3').val();
 	  //window.location.reload(true);
 	  break;
 		
@@ -788,7 +789,7 @@ $.post('https://ficha.claseejecutiva.com/index.php/controller/back_step', {
      	
 */	
 		 $.ajax({
-                url :'https://ficha.claseejecutiva.com/index.php/controller/back_step',
+                url :base_url+'/index.php/controller/back_step',
                 type : "POST",
                 data :{step:step_v,idOp:idOp_v},
                 success: function(data){		
@@ -1025,7 +1026,7 @@ switch (mpago2) {
 	$('#mpago_step_1_extranjero').removeClass("d").addClass("d-none");
 
 	 $.ajax({
-					url :'https://ficha.claseejecutiva.com/index.php/controller/chequePropios/',
+					url :base_url+'/index.php/controller/chequePropios/',
 					type : "POST",
 					data :{'idOp':idOp},
 					success: function(html){						
@@ -1082,7 +1083,7 @@ switch (mpago2) {
 
 	                            if(total_tabla_resumen_a===parseInt($('#montoFinalUSD_step_3').val())){ 									 
 								//$('#container_step_4').removeClass("d-none").addClass("d");
-								  var status_form=enviar_form($('#step_3_form').serialize(),'https://ficha.claseejecutiva.com/index.php/controller/step_3');
+								  var status_form=enviar_form($('#step_3_form').serialize(),base_url+'/index.php/controller/step_3');
 									 $('#container_step_3').removeClass("d").addClass("d-none");
 		                             $('#container_step_4').removeClass("d-none").addClass("d");
 									}else{
@@ -1113,7 +1114,7 @@ switch (mpago2) {
 	case 'mpagoCuponera':
 	$('#mpago_step_1_extranjero').removeClass("d").addClass("d-none");
 	 $.ajax({
-					url :'https://ficha.claseejecutiva.com/index.php/controller/chequePropios/',
+					url :base_url+'/index.php/controller/chequePropios/',
 					type : "POST",
 					data :{'idOp':idOp},
 					success: function(html){						
@@ -1170,7 +1171,7 @@ switch (mpago2) {
 								 $('#step_3_otros_resumen_sgte').click(function() {
 	                            if(total_tabla_resumen_a===parseInt($('#montoFinalUSD_step_3').val())){ 										 
 								//$('#container_step_4').removeClass("d-none").addClass("d");
-								  var status_form=enviar_form($('#step_3_form').serialize(),'https://ficha.claseejecutiva.com/index.php/controller/step_3');
+								  var status_form=enviar_form($('#step_3_form').serialize(),base_url+'/index.php/controller/step_3');
 									 $('#container_step_3').removeClass("d").addClass("d-none");
 		                             $('#container_step_4').removeClass("d-none").addClass("d");
 									}else{
@@ -1205,7 +1206,7 @@ switch (mpago2) {
 function mpagoOtraLayout(){
 var idOp=$('#idOp_step_3').val();
 	      $.ajax({
-					url :'https://ficha.claseejecutiva.com/index.php/controller/chequePropios/',
+					url :base_url+'/index.php/controller/chequePropios/',
 					type : "POST",
 					data :{'idOp':idOp},
 					success: function(html){						
@@ -1325,7 +1326,7 @@ var idOp=$('#idOp_step_3').val();
 	$('#mpago_step_1_extranjero').removeClass("d").addClass("d-none");
 
 	 $.ajax({
-					url :'https://ficha.claseejecutiva.com/index.php/controller/chequePropios/',
+					url :base_url+'/index.php/controller/chequePropios/',
 					type : "POST",
 					data :{'idOp':idOp},
 					success: function(html){						
@@ -1383,7 +1384,7 @@ var idOp=$('#idOp_step_3').val();
 							$('#step_3_otros_resumen_sgte').click(function() {
 							if(total_tabla_resumen_a===parseInt($('#montoFinal_step_3').val())){ 										 
 							 //$('#container_step_4').removeClass("d-none").addClass("d");
-							 var status_form=enviar_form($('#step_3_form').serialize(),'https://ficha.claseejecutiva.com/index.php/controller/step_3');
+							 var status_form=enviar_form($('#step_3_form').serialize(),base_url+'/index.php/controller/step_3');
 								$('#container_step_3').removeClass("d").addClass("d-none");
 								$('#container_step_4').removeClass("d-none").addClass("d");					 
 							  }else{
@@ -1549,7 +1550,7 @@ var idOp=$('#idOp_step_3').val();
 								 $('#step_3_otros_resumen_sgte').click(function() {
 	                             if(total_tabla_resumen_a===parseInt($('#montoFinal_step_3').val())){ 										 
 								//$('#container_step_4').removeClass("d-none").addClass("d");
-								  var status_form=enviar_form($('#step_3_form').serialize(),'https://ficha.claseejecutiva.com/index.php/controller/step_3');
+								  var status_form=enviar_form($('#step_3_form').serialize(),base_url+'/index.php/controller/step_3');
 									 $('#container_step_3').removeClass("d").addClass("d-none");
 		                             $('#container_step_4').removeClass("d-none").addClass("d");
 									}else{
@@ -1857,7 +1858,7 @@ $('#step_3_otro_cheque').prop('disabled', true);
 								 $('#step_3_otros_resumen_sgte').click(function() {
 								if(total_tabla_resumen_a===parseInt($('#montoFinal_step_3').val())){ 									 
 								//$('#container_step_4').removeClass("d-none").addClass("d");
-								  var status_form=enviar_form($('#step_3_form').serialize(),'https://ficha.claseejecutiva.com/index.php/controller/step_3');
+								  var status_form=enviar_form($('#step_3_form').serialize(),base_url+'/index.php/controller/step_3');
 									 $('#container_step_3').removeClass("d").addClass("d-none");
 		                             $('#container_step_4').removeClass("d-none").addClass("d");
 									}else{
@@ -1933,7 +1934,7 @@ $('#step_3_otro_cheque').prop('disabled', true);
 								 $('#step_3_otros_resumen_sgte').click(function() {
 								if(total_tabla_resumen_a===parseInt($('#montoFinal_step_3').val())){ 		 
 								//$('#container_step_4').removeClass("d-none").addClass("d");
-								  var status_form=enviar_form($('#step_3_form').serialize(),'https://ficha.claseejecutiva.com/index.php/controller/step_3');
+								  var status_form=enviar_form($('#step_3_form').serialize(),base_url+'/index.php/controller/step_3');
 									 $('#container_step_3').removeClass("d").addClass("d-none");
 		                             $('#container_step_4').removeClass("d-none").addClass("d");
 								}else{

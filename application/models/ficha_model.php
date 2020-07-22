@@ -131,6 +131,7 @@ class Ficha_model extends CI_Model {
 	
     function ingresar_log($data_form,$idOportunidad,$status,$log)
     {
+	date_default_timezone_set("America/Santiago");
         $data = array(
 					  'fecha_hora'=>date('Y-m-d H:i:s'),
 					  'data_form'=>$data_form,
