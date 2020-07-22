@@ -18,8 +18,14 @@ class Controller extends CI_Controller {
 
    
   public function test(){
+	  /*
 	  $this->emailEjecutiva('cmoya@diplomadosuc.cl','to','0062L00000RHyGEQA1'); 
 	  var_dump($this->email->print_debugger());
+	  */
+	  //http://devficha.claseejecutiva.com/index.php/controller/test
+	  $data= $this->ficha_model->consulta_etapa('0062L00000TuZrfQAF');
+	  echo '<pre>';
+	  die(print_r($data));
   } 
 
 public function index()
@@ -122,7 +128,8 @@ public function ficha_cookies($accion)
 		 break;
 		 
 		 case 'borrar':
-		 setcookie('FichaCe',$data, time()-604800,'/','ficha.claseejecutiva.com',false,false); 
+		// setcookie('FichaCe',$data, time()-604800,'/','ficha.claseejecutiva.com',false,false); 
+		 setcookie('FichaCe',$data, time()-604800,'/',$_SERVER['HTTP_HOST'],false,false); 
 		 //unset($_COOKIE["FichaCe"]);
 		 //$crear_cookie=true;
 		 break; 
@@ -135,7 +142,8 @@ public function ficha_cookies($accion)
 		//1 mes
 		//setcookie('FichaCe',$data, time()+2678400,$_SERVER['HTTP_HOST'],false,false); 
 		//1 semana
-		setcookie('FichaCe',$data, time()+604800,'/','ficha.claseejecutiva.com',false,false); 
+		//setcookie('FichaCe',$data, time()+604800,'/','ficha.claseejecutiva.com',false,false); 
+		setcookie('FichaCe',$data, time()+604800,'/',$_SERVER['HTTP_HOST'],false,false); 
 	}
  
 }
@@ -362,7 +370,7 @@ public function ErrorUpload($error,$idOp)
 									  'ciudad'=>$form_step_2->ciudad_extranjera,
                                       //Fin Account
 									  //Oportunidad
-									  'url_descarga'=>'https://ficha.claseejecutiva.com/index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
+									  'url_descarga'=>base_url().'index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Transferencia Bancaria Internacional(8)',
@@ -413,7 +421,7 @@ public function ErrorUpload($error,$idOp)
 									  'ciudad'=>$form_step_2->ciudad_extranjera,
                                       //Fin Account
 									  //Oportunidad
-									  'url_descarga'=>'https://ficha.claseejecutiva.com/index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
+									  'url_descarga'=>base_url().'index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Pago en Cuotas(5)',
@@ -468,7 +476,7 @@ public function ErrorUpload($error,$idOp)
 									  'ciudad'=>$form_step_2->ciudad_extranjera,
                                       //Fin Account
 									  //Oportunidad
-									  'url_descarga'=>'https://ficha.claseejecutiva.com/index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
+									  'url_descarga'=>base_url().'index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Cheque(2)',
@@ -521,7 +529,7 @@ public function ErrorUpload($error,$idOp)
 									  'ciudad'=>$form_step_2->ciudad_extranjera,
                                       //Fin Account
 									  //Oportunidad
-									  'url_descarga'=>'https://ficha.claseejecutiva.com/index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
+									  'url_descarga'=>base_url().'index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'WebPay(7)',
@@ -574,7 +582,7 @@ public function ErrorUpload($error,$idOp)
 									  'ciudad'=>$form_step_2->ciudad_extranjera,
                                       //Fin Account
 									  //Oportunidad
-									  'url_descarga'=>'https://ficha.claseejecutiva.com/index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
+									  'url_descarga'=>base_url().'index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Orden de Compra(3)',
@@ -731,7 +739,7 @@ public function ErrorUpload($error,$idOp)
 									  'ciudad'=>$form_step_2->ciudad_extranjera,
                                       //Fin Account
 									  //Oportunidad
-									  'url_descarga'=>'https://ficha.claseejecutiva.com/index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
+									  'url_descarga'=>base_url().'index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
 									  //Fin Oportunidad
 									  'data_mpagos'=>json_encode($data),
 									  'productos'=>$form_step_1->productos
@@ -831,7 +839,7 @@ public function ErrorUpload($error,$idOp)
 						'.$email.'<br> 					
 						Clase Ejecutiva <br>
 						Pontificia Universidad Católica de Chile<br>
-						www.claseejecutiva.com';
+						https://www.claseejecutiva.uc.cl';
 						   
 			//cargamos la configuración para enviar con gmail
 			$this->email->initialize($configGmail);
@@ -889,7 +897,7 @@ public function ErrorUpload($error,$idOp)
                         Equipo de TI Clase Ejecutiva UC<br>						
 						Clase Ejecutiva <br>
 						Pontificia Universidad Católica de Chile<br>
-						www.claseejecutiva.com';
+						https://www.claseejecutiva.uc.cl';
 						   
 			//cargamos la configuración para enviar con gmail
 			$this->email->initialize($configGmail);
