@@ -18,14 +18,15 @@ class Controller extends CI_Controller {
 
    
   public function test(){
-	  /*
-	  $this->emailEjecutiva('cmoya@diplomadosuc.cl','to','0062L00000RHyGEQA1'); 
+	  
+	  $this->email_exito('xquinteros@diplomadosuc.cl','Ximena','crmoyag@uc.cl','0062L00000TuZrfQAF');
+	 // $this->emailEjecutiva('cmoya@diplomadosuc.cl','to','0062L00000RHyGEQA1'); 
 	  var_dump($this->email->print_debugger());
-	  */
+	
 	  //http://devficha.claseejecutiva.com/index.php/controller/test
 	  $data= $this->ficha_model->consulta_etapa('0062L00000TuZrfQAF');
 	  echo '<pre>';
-	  die(print_r($data));
+	 // die(print_r($data));
   } 
 
 public function index()
@@ -870,18 +871,18 @@ public function ErrorUpload($error,$idOp)
 			//cargamos la libreria email de ci (CodeIgniter)
 			$this->load->library("email");
 			//configuracion para gmail
-			/*
+			
 			$configGmail = array(
 				'protocol' => 'smtp',
 				'smtp_host' => 'ssl://smtp.gmail.com',
 				'smtp_port' => 465,
-				'smtp_user' => 'alumnosuc@diplomadosuc.cl',
-				'smtp_pass' => 'Ingnk2f82',
+				'smtp_user' => 'noreply@diplomadosuc.cl',
+				'smtp_pass' => 'admce8585',
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
 				'newline' => "\r\n"
 			);    
-			*/
+			/*
 			$configGmail = array(
 				'protocol' => 'smtp',
 				'smtp_host' => 'ssl://smtp.gmail.com',
@@ -892,6 +893,8 @@ public function ErrorUpload($error,$idOp)
 				'charset' => 'utf-8',
 				'newline' => "\r\n"
 			); 
+			*/
+			
 			 $pieFirma='
 						Saluda Atte.<br><br>
                         Equipo de TI Clase Ejecutiva UC<br>						
