@@ -587,8 +587,8 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 			<div class="col-md-3">
 			   <Select type="text" name="genero" id="genero" class="form-control" placeholder="Genero"  >
 			     <option value="" selected>Seleccionar</option>
-                 <option value='M'>Masculino</option>
-                 <option value='F'>Femenino</option>
+                 <option value='M(2)'>Masculino</option>
+                 <option value='F(1)'>Femenino</option>
 			   </Select>
 		    </div>
         </div>
