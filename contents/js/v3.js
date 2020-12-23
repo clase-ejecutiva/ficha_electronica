@@ -21,6 +21,11 @@ var total_tabla_resumen_terceros=0;
 var mpago;
 let info_alum
 let base_url = window.location.origin;
+let comuna='{"Tarapacá(RG-1)":["POZO ALMONTE (CM-231)","CAMIÑA (CM-58)","COLCHANE (CM-74)","PICA (CM-222)","IQUIQUE (CM-131)","ALTO HOSPICIO (CM-348)","HUARA (CM-128)"],"Antofagasta(RG-2)":["SN.PEDRO DE ATACAMA (CM-297)","OLLAGUE (CM-199)","TALTAL (CM-302)","MEJILLONES (CM-179)","MARIA ELENA (CM-174)","SIERRA GORDA (CM-296)","TOCOPILLA (CM-309)","CALAMA (CM-51)","ANTOFAGASTA (CM-42)"],"Atacama(RG-3)":["CHAÑARAL (CM-97)","COPIAPO (CM-82)","HUASCO (CM-129)","EL CARMEN (CM-106)","VALLENAR (CM-319)","ALTO DEL CARMEN (CM-38)","TIERRA AMARILLA (CM-305)","FREIRINA (CM-114)","CALDERA (CM-53)","DIEGO DE ALMAGRO (CM-104)"],"Coquimbo(RG-4)":["VICUÑA (CM-321)","PUNITAQUI (CM-240)","PAIHUANO (CM-202)","ANDACOLLO (CM-40)","OVALLE (CM-201)","LA HIGUERA (CM-138)","RIO HURTADO (CM-269)","SALAMANCA (CM-275)","COMBARBALA (CM-78)","LOS VILOS (CM-165)","MONTE PATRIA (CM-183)","LA SERENA (CM-140)","ILLAPEL (CM-130)","COQUIMBO (CM-83)","CANELA O MINCHA (CM-59)"],"Valparaíso(RG-5)":["NOGALES (CM-193)","EL QUISCO (CM-108)","EL TABO (CM-109)","HIJUELAS (CM-124)","ISLA DE PASCUA (CM-133)","JUAN FERNANDEZ (CM-134)","LA CALERA (CM-135)","LA CRUZ (CM-136)","LA LIGUA (CM-139)","LIMACHE (CM-152)","LOS ANDES (CM-160)","LLAY LLAY (CM-169)","OLMUE (CM-198)","PANQUEHUE (CM-208)","PAPUDO (CM-209)","PETORCA (CM-220)","PUCHUNCAVI (CM-234)","PUTAENDO (CM-245)","QUILPUE (CM-251)","QUILLOTA (CM-254)","QUINTERO (CM-257)","ALGARROBO (CM-36)","CABILDO (CM-49)","CATEMU (CM-54)","CALLE LARGA (CM-56)","CARTAGENA (CM-62)","CASABLANCA (CM-63)","RINCONADA (CM-266)","SAN ANTONIO (CM-277)","SAN ESTEBAN (CM-280)","SAN FELIPE (CM-282)","SANTA MARIA (CM-294)","SANTO DOMINGO (CM-295)","VALPARAISO (CM-318)","VILLA ALEMANA (CM-325)","VIÑA DEL MAR (CM-327)","ZAPALLAR (CM-331)","CONCON (CM-336)","LLOLLEO (CM-337)"],"Libertador General Bernardo OHiggins(RG-6)":["LOLOL (CM-155)","QUINTA DE TILCOCO (CM-256)","MARCHIGUE (CM-173)","MOSTAZAL (CM-184)","RANCAGUA (CM-259)","MALLOA (CM-172)","MACHALI (CM-170)","CODEGUA (CM-69)","LA ESTRELLA (CM-137)","PALMILLA (CM-206)","PAREDONES (CM-210)","LITUECHE (CM-154)","PERALILLO (CM-218)","PEUMO (CM-221)","LAS CABRAS (CM-148)","PICHIDEGUA (CM-223)","PICHILEMU (CM-224)","SANTA CRUZ (CM-292)","SAN VICENTE DE TAGUA TAGUA (CM-291)","SAN FERNANDO (CM-283)","PLACILLA (CM-228)","NAVIDAD (CM-190)","COLTAUCO (CM-76)","REQUINOA (CM-264)","PUMANQUE (CM-239)","RENGO (CM-263)","DOÑIHUE (CM-105)","CHIMBARONGO (CM-101)","CHEPICA (CM-98)","GRANEROS (CM-122)","OLIVAR (CM-197)","NANCAGUA (CM-187)","COINCO (CM-72)"],"Maule(RG-7)":["COLBUN (CM-73)","TENO (CM-301)","MAULE (CM-177)","SAN JAVIER (CM-276)","LICANTEN (CM-151)","TALCA (CM-299)","MOLINA (CM-182)","SAGRADA FAMILIA (CM-274)","ROMERAL (CM-273)","CURICO (CM-94)","RIO CLARO (CM-268)","SAN RAFAEL (CM-341)","RETIRO (CM-265)","CAUQUENES (CM-65)","CUREPTO (CM-93)","HUALAÑÉ (CM-126)","LONGAVI (CM-157)","VILLA ALEGRE (CM-324)","CONSTITUCION (CM-80)","VICHUQUEN (CM-322)","EMPEDRADO (CM-110)","YERBAS BUENAS (CM-328)","CHANCO (CM-96)","PARRAL (CM-211)","PELARCO (CM-212)","PELLUHUE (CM-213)","SAN CLEMENTE (CM-279)","PENCAHUE (CM-215)","LINARES (CM-153)"],"Bío-Bío(RG-8)":["QUILLON (CM-253)","NEGRETE (CM-191)","NINHUE (CM-192)","ÑIQUEN (CM-195)","LEBU (CM-150)","PEMUCO (CM-214)","PENCO (CM-216)","YUMBEL (CM-329)","PORTEZUELO (CM-229)","YUNGAY (CM-330)","COBQUECURA (CM-332)","QUILACO (CM-252)","QUILLECO (CM-333)","SANTA BARBARA (CM-334)","QUIRIHUE (CM-258)","RANQUIL (CM-260)","RAUCO (CM-261)","LAJA (CM-145)","ANTUCO (CM-43)","ARAUCO (CM-44)","BULNES (CM-48)","CABRERO (CM-50)","CAÑETE (CM-60)","CHIGUAYANTE (CM-339)","COELEMU (CM-70)","COIHUECO (CM-71)","HUALQUI (CM-127)","CONCEPCION (CM-79)","CONTULMO (CM-81)","CORONEL (CM-84)","CURANILAHUE (CM-91)","CHILLAN (CM-100)","SAN PEDRO DE LA PAZ (CM-342)","SAN CARLOS (CM-278)","SAN FABIAN (CM-281)","SAN IGNACIO (CM-285)","SAN NICOLAS (CM-287)","SAN ROSENDO (CM-290)","SANTA JUANA (CM-293)","CHILLAN VIEJO (CM-345)","ALTO BIOBIO (CM-346)","TALCAHUANO (CM-300)","TIRUA (CM-308)","FLORIDA (CM-112)","TOME (CM-311)","TREHUACO (CM-315)","TUCAPEL (CM-316)","HUALPEN (CM-347)","LOS ALAMOS (CM-159)","LOS ANGELES (CM-161)","LOTA (CM-166)","MULCHEN (CM-185)","NACIMIENTO (CM-186)"],"La Araucanía(RG-9)":["TOLTEN (CM-310)","VILLARRICA (CM-326)","FREIRE (CM-113)","TEODORO SCHMIDT (CM-304)","TEMUCO (CM-303)","COLLIPULLI (CM-77)","MELIPEUCO (CM-180)","LAUTARO (CM-149)","PERQUENCO (CM-219)","VICTORIA (CM-320)","CARAHUE (CM-61)","VILCUN (CM-323)","TRAIGUEN (CM-314)","CHOLCHOL (CM-349)","ANGOL (CM-41)","CUNCO (CM-87)","CURACAUTIN (CM-88)","PITRUFQUEN (CM-227)","LONCOCHE (CM-156)","LOS SAUCES (CM-164)","CURARREHUE (CM-92)","PUERTO SAAVEDRA (CM-237)","PADRE LAS CASAS (CM-343)","GALVARINO (CM-119)","ERCILLA (CM-111)","GORBEA (CM-121)","PUREN (CM-243)","LUMACO (CM-167)","PUCON (CM-233)","RENAICO (CM-262)","LONQUIMAY (CM-158)","NUEVA IMPERIAL (CM-194)"],"Los Lagos(RG-10)":["CHONCHI (CM-102)","RIO NEGRO (CM-271)","PUERTO MONTT (CM-235)","PUERTO VARAS (CM-238)","PUERTO OCTAY (CM-236)","MAULLIN (CM-178)","CALBUCO (CM-52)","FRESIA (CM-115)","FRUTILLAR (CM-116)","FUTALEUFU (CM-117)","CASTRO (CM-64)","ANCUD (CM-39)","COCHAMO (CM-67)","QUINCHAO (CM-255)","QUEMCHI (CM-250)","PALENA (CM-205)","OSORNO (CM-200)","QUELLON (CM-249)","HUALAIHUE (CM-125)","QUEILEN (CM-248)","SAN PABLO (CM-288)","CHILOE (CM-335)","PUYEHUE (CM-247)","LOS MUERMOS (CM-163)","SAN JUAN DE LA COSTA (CM-286)","CURACO DE VELEZ (CM-90)","LLANQUIHUE (CM-168)","CHAITEN (CM-95)","PURRANQUE (CM-244)","PUQUELDON (CM-242)","DALCAHUE (CM-103)"],"Aysén del General Carlos Ibáñez del Campo(RG-11)":["CHILE CHICO (CM-99)","LAGO VERDE (CM-143)","AYSEN (CM-46)","CISNES (CM-66)","COCHRANE (CM-68)","GUAITECAS (CM-123)","COYHAIQUE (CM-86)","RIO IBAQEZ (CM-270)","TORTEL (CM-313)","OHIGGINS (CM-196)"],"Magallanes y la Antártica Chilena(RG-12)":["SAN GREGORIO (CM-284)","ANTARTICA (CM-344)","RIO VERDE (CM-272)","PUNTA ARENAS (CM-241)","PRIMAVERA (CM-232)","TORRES DEL PAINE (CM-312)","TIMAUKEL (CM-307)","PUERTO NATALES (CM-188)","LAGUNA BLANCA (CM-144)","PORVENIR (CM-230)","CABO DE HORNOS (EX NAVARINO) (CM-189)"],"Metropolitana(RG-13)":["SAN BERNARDO (CM-29)","PAINE (CM-204)","CURACAVI (CM-89)","ÑUÑOA (CM-19)","PROVIDENCIA (CM-20)","PUENTE ALTO (CM-21)","PEDRO AGUIRRE CERDA (CM-22)","PEÑALOLEN (CM-23)","PUDAHUEL (CM-24)","QUILICURA (CM-25)","QUINTA NORMAL (CM-26)","RENCA (CM-27)","RECOLETA (CM-28)","ALHUE (CM-37)","SAN JOAQUIN (CM-30)","SAN MIGUEL (CM-31)","SAN RAMON (CM-32)","SANTIAGO (CM-33)","VITACURA (CM-34)","SAN JOSE DE MAIPO (CM-35)","LAMPA (CM-146)","EL MONTE (CM-107)","SAN PEDRO (CM-289)","PIRQUE (CM-226)","PINTO (CM-225)","COLINA (CM-75)","CONCHALI (CM-1)","MALLOCO (CM-340)","TALAGANTE (CM-298)","ISLA DE MAIPO (CM-132)","MARIA PINTO (CM-175)","PEÑAFLOR (CM-217)","CERRO NAVIA (CM-2)","PADRE HURTADO (CM-338)","CALERA DE TANGO (CM-55)","TILTIL (CM-306)","CERRILLOS (CM-3)","MELIPILLA (CM-181)","BUIN (CM-47)","EL BOSQUE (CM-4)","ESTACION CENTRAL (CM-5)","HUECHURABA (CM-6)","INDEPENDENCIA (CM-7)","LAS CONDES (CM-8)","LA CISTERNA (CM-9)","LO BARNECHEA (CM-10)","LO ESPEJO (CM-11)","LA FLORIDA (CM-12)","LA GRANJA (CM-13)","LO PRADO (CM-14)","LA PINTANA (CM-15)","LA REINA (CM-16)","MAIPU (CM-17)","MACUL (CM-18)"],"Los Ríos(RG-14)":["SAN JOSE DE MARIQUINA (CM-176)","PANGUIPULLI (CM-207)","RIO BUENO (CM-267)","LA UNION (CM-141)","LOS LAGOS (CM-162)","VALDIVIA (CM-317)","MAFIL (CM-171)","FUTRONO (CM-118)","CORRAL (CM-85)","LAGO RANCO (CM-142)","PAILLACO (CM-203)","LANCO (CM-147)"],"Arica y Parinacota(RG-15)":["PUTRE (CM-246)","CAMARONES (CM-57)","GENERAL LAGOS (CM-120)","ARICA (CM-45)"]}';
+var comunaArray = JSON.parse(comuna);	
+var html_comunas;
+
+
 
 $(document).ready(function() {
 	
@@ -127,41 +132,10 @@ if($('#step_2_form').length > 0){
 			 $('#id_region_residencia').change(function() {
 				// alert('actualizar region');
 				var region=$('#id_region_residencia').val();
-				region_f=region.split('_');
-				
-		 $.ajax({
-                url :base_url+'/index.php/controller/get_comuna',
-                type : "POST",
-                data :{id_comuna:region_f[1]},
-                success: function(data){		
-				respuesta = JSON.parse(data);
-				datos=respuesta.comunas;
-					if(respuesta)
-					{ 
-					//console.log(respuesta);	
-                    var html_comunas='<option value="" selected>Seleccione Comuna</option>';				
-					Object.keys(datos).forEach(function (key) {				
-						html_comunas+='<option value="'+datos[key].nombre+'">'+datos[key].nombre+'</option>';						
-					});				
-				    $('#id_comuna_alumno').html(html_comunas);
-
-					
-					}else{
-					// setTimeout('window.location.href = "http://trial.claseejecutiva.com/publico/index/login";', 2000); 	
-					}
-				 
-                },
-                error : function(xhr,errmsg,err) {
-                  console.log(xhr.status + ": " + xhr.responseText);
-				  
-                 }
-              });				
-				
-				
-				
-				
-
-				
+				//region_f=region.split('_');				
+				var result =opcionComuna(region);			
+			   $('#id_comuna_alumno').html(result);
+								
 			  });
 			
 			
@@ -1198,7 +1172,16 @@ switch (mpago2) {
 }
 
 
+function opcionComuna(str){
+     var comuna =comunaArray[str];
+	 html_comunas ='<option value="" selected>Seleccione Comuna</option>'
+     comuna.forEach( comuna => {
+        var textComuna = comuna.replace(/ *\([^)]*\) */g,''); 
+        html_comunas+= '<option value="'+comuna+'">'+textComuna+'</option>';
+      });
 
+return html_comunas;
+}
 
 
 

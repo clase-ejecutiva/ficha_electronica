@@ -774,7 +774,7 @@ public function ErrorUpload($error,$idOp)
 				//debug Level 0
 				//die(print_r($response));
 				//debug Level 1
-				//die(print_r($responceUpdate));
+			//die(print_r($responceUpdate));
 				
 
 				
