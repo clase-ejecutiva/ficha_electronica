@@ -774,7 +774,7 @@ public function ErrorUpload($error,$idOp)
 				//debug Level 0
 				//die(print_r($response));
 				//debug Level 1
-				//die(print_r($responceUpdate));
+			//die(print_r($responceUpdate));
 				
 
 				
@@ -855,7 +855,7 @@ public function ErrorUpload($error,$idOp)
 			Para más información o consultas,por favor contactarse con su ejecutiva de admisión. 
 									<br><br>'.$pieFirma);
 			//$this->email->attach('./contents/images/Datos_CE.pdf', 'Datos_Importantes');
-			$this->email->attach('./contents/images/Alternativa_de_pagos.pdf', 'Datos_Importantes');
+			//$this->email->attach('./contents/images/Alternativa_de_pagos.pdf', 'Datos_Importantes');
 
 			 //$this->email->message('test');
 			if($this->email->send()){

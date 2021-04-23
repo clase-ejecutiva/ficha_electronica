@@ -21,6 +21,11 @@ var total_tabla_resumen_terceros=0;
 var mpago;
 let info_alum
 let base_url = window.location.origin;
+let comuna='{"Tarapacá(RG-1)":["Camiña (CM-58)","Colchane (CM-74)","Pica (CM-222)","Iquique (CM-131)","Pozo Almonte (CM-231)","Huara (CM-128)","Alto Hospicio (CM-348)"],"Antofagasta(RG-2)":["Antofagasta (CM-42)","Taltal (CM-302)","Sn.Pedro De Atacama (CM-297)","Ollague (CM-199)","Tocopilla (CM-309)","Calama (CM-51)","Mejillones (CM-179)","Maria Elena (CM-174)","Sierra Gorda (CM-296)"],"Atacama(RG-3)":["Copiapo (CM-82)","Chañaral (CM-97)","Vallenar (CM-319)","Diego De Almagro (CM-104)","Freirina (CM-114)","Tierra Amarilla (CM-305)","Huasco (CM-129)","Alto Del Carmen (CM-38)","Caldera (CM-53)"],"Coquimbo(RG-4)":["Salamanca (CM-275)","La Serena (CM-140)","Illapel (CM-130)","Ovalle (CM-201)","Paihuano (CM-202)","Vicuña (CM-321)","Andacollo (CM-40)","Canela O Mincha (CM-59)","Coquimbo (CM-83)","Combarbala (CM-78)","La Higuera (CM-138)","Punitaqui (CM-240)","Los Vilos (CM-165)","Rio Hurtado (CM-269)","Monte Patria (CM-183)"],"Valparaíso(RG-5)":["Catemu (CM-54)","Quilpue (CM-251)","Quillota (CM-254)","Cabildo (CM-49)","Quintero (CM-257)","Viña Del Mar (CM-327)","Algarrobo (CM-36)","Villa Alemana (CM-325)","Valparaiso (CM-318)","Hijuelas (CM-124)","Isla De Pascua (CM-133)","Juan Fernandez (CM-134)","La Calera (CM-135)","La Cruz (CM-136)","La Ligua (CM-139)","Santo Domingo (CM-295)","Santa Maria (CM-294)","Llolleo (CM-337)","Limache (CM-152)","Concon (CM-336)","Los Andes (CM-160)","El Quisco (CM-108)","San Felipe (CM-282)","San Esteban (CM-280)","El Tabo (CM-109)","San Antonio (CM-277)","Llay Llay (CM-169)","Rinconada (CM-266)","Zapallar (CM-331)","Nogales (CM-193)","Olmue (CM-198)","Panquehue (CM-208)","Papudo (CM-209)","Petorca (CM-220)","Puchuncavi (CM-234)","Casablanca (CM-63)","Cartagena (CM-62)","Putaendo (CM-245)","Calle Larga (CM-56)"],"Libertador General Bernardo OHiggins(RG-6)":["Peralillo (CM-218)","Lolol (CM-155)","Rancagua (CM-259)","Peumo (CM-221)","Las Cabras (CM-148)","Pichidegua (CM-223)","Pichilemu (CM-224)","Litueche (CM-154)","Nancagua (CM-187)","Placilla (CM-228)","Mostazal (CM-184)","Chimbarongo (CM-101)","La Estrella (CM-137)","Coltauco (CM-76)","Chepica (CM-98)","Graneros (CM-122)","Santa Cruz (CM-292)","Machali (CM-170)","Palmilla (CM-206)","Malloa (CM-172)","Marchigue (CM-173)","Requinoa (CM-264)","Navidad (CM-190)","Quinta De Tilcoco (CM-256)","Paredones (CM-210)","San Fernando (CM-283)","San Vicente De Tagua Tagua (CM-291)","Pumanque (CM-239)","Coinco (CM-72)","Rengo (CM-263)","Doñihue (CM-105)","Olivar (CM-197)","Codegua (CM-69)"],"Maule(RG-7)":["San Clemente (CM-279)","Empedrado (CM-110)","Retiro (CM-265)","Hualañé (CM-126)","Vichuquen (CM-322)","Linares (CM-153)","Licanten (CM-151)","Chanco (CM-96)","Cauquenes (CM-65)","Parral (CM-211)","Pelarco (CM-212)","Pelluhue (CM-213)","Pencahue (CM-215)","Yerbas Buenas (CM-328)","Curico (CM-94)","Curepto (CM-93)","San Rafael (CM-341)","Talca (CM-299)","Constitucion (CM-80)","Teno (CM-301)","Villa Alegre (CM-324)","Colbun (CM-73)","San Javier (CM-276)","Molina (CM-182)","Sagrada Familia (CM-274)","Romeral (CM-273)","Maule (CM-177)","Longavi (CM-157)","Rio Claro (CM-268)"],"Bío-Bío(RG-8)":["Tucapel (CM-316)","Florida (CM-112)","Hualqui (CM-127)","Laja (CM-145)","Lebu (CM-150)","Los Alamos (CM-159)","Los Angeles (CM-161)","Lota (CM-166)","Mulchen (CM-185)","Nacimiento (CM-186)","Negrete (CM-191)","Penco (CM-216)","Quilaco (CM-252)","Rauco (CM-261)","Antuco (CM-43)","Arauco (CM-44)","Cabrero (CM-50)","Cañete (CM-60)","Concepcion (CM-79)","Contulmo (CM-81)","Coronel (CM-84)","Curanilahue (CM-91)","San Rosendo (CM-290)","Santa Juana (CM-293)","Talcahuano (CM-300)","Tirua (CM-308)","Tome (CM-311)","Yumbel (CM-329)","Quilleco (CM-333)","Santa Barbara (CM-334)","Chiguayante (CM-339)","San Pedro De La Paz (CM-342)","Alto Biobio (CM-346)","Hualpen (CM-347)"],"La Araucanía(RG-9)":["Traiguen (CM-314)","Tolten (CM-310)","Curacautin (CM-88)","Villarrica (CM-326)","Teodoro Schmidt (CM-304)","Angol (CM-41)","Renaico (CM-262)","Melipeuco (CM-180)","Freire (CM-113)","Nueva Imperial (CM-194)","Carahue (CM-61)","Puren (CM-243)","Temuco (CM-303)","Lautaro (CM-149)","Loncoche (CM-156)","Ercilla (CM-111)","Padre Las Casas (CM-343)","Cholchol (CM-349)","Cunco (CM-87)","Puerto Saavedra (CM-237)","Vilcun (CM-323)","Galvarino (CM-119)","Victoria (CM-320)","Pucon (CM-233)","Collipulli (CM-77)","Lonquimay (CM-158)","Gorbea (CM-121)","Los Sauces (CM-164)","Perquenco (CM-219)","Pitrufquen (CM-227)","Curarrehue (CM-92)","Lumaco (CM-167)"],"Los Lagos(RG-10)":["Maullin (CM-178)","Fresia (CM-115)","Frutillar (CM-116)","Futaleufu (CM-117)","Hualaihue (CM-125)","Ancud (CM-39)","Chiloe (CM-335)","Quinchao (CM-255)","San Pablo (CM-288)","Quemchi (CM-250)","San Juan De La Costa (CM-286)","Los Muermos (CM-163)","Llanquihue (CM-168)","Calbuco (CM-52)","Quellon (CM-249)","Queilen (CM-248)","Rio Negro (CM-271)","Puyehue (CM-247)","Curaco De Velez (CM-90)","Purranque (CM-244)","Puqueldon (CM-242)","Castro (CM-64)","Osorno (CM-200)","Cochamo (CM-67)","Puerto Varas (CM-238)","Puerto Octay (CM-236)","Puerto Montt (CM-235)","Dalcahue (CM-103)","Chonchi (CM-102)","Palena (CM-205)","Chaiten (CM-95)"],"Aysén del General Carlos Ibáñez del Campo(RG-11)":["Aysen (CM-46)","Cisnes (CM-66)","Cochrane (CM-68)","Coyhaique (CM-86)","Chile Chico (CM-99)","Ohiggins (CM-196)","Rio Ibaqez (CM-270)","Lago Verde (CM-143)","Guaitecas (CM-123)","Tortel (CM-313)"],"Magallanes y la Antártica Chilena(RG-12)":["Torres Del Paine (CM-312)","Cabo De Hornos (Ex Navarino) (CM-189)","Puerto Natales (CM-188)","Laguna Blanca (CM-144)","Antartica (CM-344)","San Gregorio (CM-284)","Rio Verde (CM-272)","Primavera (CM-232)","Timaukel (CM-307)","Punta Arenas (CM-241)","Porvenir (CM-230)"],"Metropolitana(RG-13)":["Malloco (CM-340)","Paine (CM-204)","Macul (CM-18)","Colina (CM-75)","Ñuñoa (CM-19)","Padre Hurtado (CM-338)","Melipilla (CM-181)","Providencia (CM-20)","Calera De Tango (CM-55)","Puente Alto (CM-21)","Talagante (CM-298)","Isla De Maipo (CM-132)","El Monte (CM-107)","Conchali (CM-1)","Cerro Navia (CM-2)","Tiltil (CM-306)","Pedro Aguirre Cerda (CM-22)","Alhue (CM-37)","Peñalolen (CM-23)","Cerrillos (CM-3)","San Jose De Maipo (CM-35)","Vitacura (CM-34)","Santiago (CM-33)","San Ramon (CM-32)","San Miguel (CM-31)","San Joaquin (CM-30)","San Bernardo (CM-29)","Recoleta (CM-28)","Renca (CM-27)","Quinta Normal (CM-26)","Quilicura (CM-25)","El Bosque (CM-4)","Estacion Central (CM-5)","Huechuraba (CM-6)","Independencia (CM-7)","Las Condes (CM-8)","La Cisterna (CM-9)","Lo Barnechea (CM-10)","Lo Espejo (CM-11)","La Florida (CM-12)","La Granja (CM-13)","Lo Prado (CM-14)","La Pintana (CM-15)","La Reina (CM-16)","Maipu (CM-17)","Curacavi (CM-89)","Pirque (CM-226)","Peñaflor (CM-217)","Maria Pinto (CM-175)","San Pedro (CM-289)","Buin (CM-47)","Pudahuel (CM-24)","Lampa (CM-146)"],"Los Ríos(RG-14)":["Mafil (CM-171)","Los Lagos (CM-162)","Lago Ranco (CM-142)","Valdivia (CM-317)","La Union (CM-141)","Corral (CM-85)","San Jose De Mariquina (CM-176)","Rio Bueno (CM-267)","Lanco (CM-147)","Futrono (CM-118)","Panguipulli (CM-207)","Paillaco (CM-203)"],"Arica y Parinacota(RG-15)":["Arica (CM-45)","General Lagos (CM-120)","Camarones (CM-57)","Putre (CM-246)"],"Ñuble(RG-16)":["Portezuelo (CM-229)","Yungay (CM-330)","El Carmen (CM-106)","Cobquecura (CM-332)","Ninhue (CM-192)","Coelemu (CM-70)","Quillon (CM-253)","Pinto (CM-225)","Pemuco (CM-214)","Bulnes (CM-48)","Ranquil (CM-260)","Quirihue (CM-258)","Ñiquen (CM-195)","Trehuaco (CM-315)","Chillan (CM-100)","San Ignacio (CM-285)","Coihueco (CM-71)","Chillan Viejo (CM-345)","San Carlos (CM-278)","San Fabian (CM-281)","San Nicolas (CM-287)"]}';
+var comunaArray = JSON.parse(comuna);	
+var html_comunas;
+
+
 
 $(document).ready(function() {
 	
@@ -127,41 +132,10 @@ if($('#step_2_form').length > 0){
 			 $('#id_region_residencia').change(function() {
 				// alert('actualizar region');
 				var region=$('#id_region_residencia').val();
-				region_f=region.split('_');
-				
-		 $.ajax({
-                url :base_url+'/index.php/controller/get_comuna',
-                type : "POST",
-                data :{id_comuna:region_f[1]},
-                success: function(data){		
-				respuesta = JSON.parse(data);
-				datos=respuesta.comunas;
-					if(respuesta)
-					{ 
-					//console.log(respuesta);	
-                    var html_comunas='<option value="" selected>Seleccione Comuna</option>';				
-					Object.keys(datos).forEach(function (key) {				
-						html_comunas+='<option value="'+datos[key].nombre+'">'+datos[key].nombre+'</option>';						
-					});				
-				    $('#id_comuna_alumno').html(html_comunas);
-
-					
-					}else{
-					// setTimeout('window.location.href = "http://trial.claseejecutiva.com/publico/index/login";', 2000); 	
-					}
-				 
-                },
-                error : function(xhr,errmsg,err) {
-                  console.log(xhr.status + ": " + xhr.responseText);
-				  
-                 }
-              });				
-				
-				
-				
-				
-
-				
+				//region_f=region.split('_');				
+				var result =opcionComuna(region);			
+			   $('#id_comuna_alumno').html(result);
+								
 			  });
 			
 			
@@ -1198,7 +1172,16 @@ switch (mpago2) {
 }
 
 
+function opcionComuna(str){
+     var comuna =comunaArray[str];
+	 html_comunas ='<option value="" selected>Seleccione Comuna</option>'
+     comuna.forEach( comuna => {
+        var textComuna = comuna.replace(/ *\([^)]*\) */g,''); 
+        html_comunas+= '<option value="'+comuna+'">'+textComuna+'</option>';
+      });
 
+return html_comunas;
+}
 
 
 
