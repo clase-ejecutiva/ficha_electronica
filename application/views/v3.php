@@ -1023,6 +1023,8 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 													<option value='Bío-Bío(RG-8)'>Bío Bío</option>
 													<option value='La Araucanía(RG-9)'>La Araucanía</option>
 													<option value='Los Lagos(RG-10)'>Los Lagos</option>													
+													<option value='Los Ríos(RG-14)'>Los Rios</option>													
+													<option value='Ñuble(RG-16)'>Ñuble</option>													
 													<option value='Aysén del General Carlos Ibáñez del Campo(RG-11)'>Aysén del General Carlos Ibáñez del Campo</option>
 													<option value='Magallanes y la Antártica Chilena(RG-12)'>Magallanes y la Antártica Chilena</option>	
                         </select>		
