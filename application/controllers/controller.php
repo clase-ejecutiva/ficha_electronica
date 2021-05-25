@@ -19,14 +19,15 @@ class Controller extends CI_Controller {
    
   public function test(){
 	  
-	  $this->email_exito('xquinteros@diplomadosuc.cl','Ximena','crmoyag@uc.cl','0062L00000TuZrfQAF');
+	  //$this->email_exito('xquinteros@diplomadosuc.cl','Ximena','crmoyag@uc.cl','0062L00000TuZrfQAF');
 	 // $this->emailEjecutiva('cmoya@diplomadosuc.cl','to','0062L00000RHyGEQA1'); 
-	  var_dump($this->email->print_debugger());
+	  //var_dump($this->email->print_debugger());
 	
 	  //http://devficha.claseejecutiva.com/index.php/controller/test
+	  $sku_producto = $this->ficha_model->consulta_sku_op('0062L00000Usw7iQAB');
 	  $data= $this->ficha_model->consulta_etapa('0062L00000TuZrfQAF');
 	  echo '<pre>';
-	 // die(print_r($data));
+	  die(print_r($sku_producto));
   } 
 
 public function index()
@@ -43,7 +44,7 @@ public function index()
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_URL =>  $url_crear));
 	$response = curl_exec($ch1); 
-	curl_close($ch);
+	curl_close($ch1);
 	
 	
 	if(isset($_COOKIE['FichaCe'])){
@@ -753,8 +754,24 @@ public function ErrorUpload($error,$idOp)
 				foreach ( $dataForm as $key => $value) {
 				$post_items[] = $key . '=' . $value;
 			   }			
-				$post_string = implode ('&', $post_items);						  
-				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';		
+				$post_string = implode ('&', $post_items);	
+
+				
+				$sku_producto = $this->ficha_model->consulta_sku_op($form_step_1->idOp);
+				
+				
+				$unidad= $this->ficha_model->consulta_unidad_sf($sku_producto);		
+				
+				if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
+
+				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';			
+				}else{
+			
+				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';			
+				}				
+
+				
+				//$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';		
 				 $ch = curl_init($url_ce);
 				 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
 				 curl_setopt($ch, CURLOPT_USERAGENT,"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
@@ -774,7 +791,8 @@ public function ErrorUpload($error,$idOp)
 				//debug Level 0
 				//die(print_r($response));
 				//debug Level 1
-			//die(print_r($responceUpdate));
+				echo '<pre>';
+			die(print_r($responceUpdate));
 				
 
 				
@@ -948,9 +966,20 @@ public function ErrorUpload($error,$idOp)
 
 	public function malla()
 	{
-		$idOp=$this->input->get('idOp');
 		
+		$idOp=$this->input->get('idOp');
+	
+        $unidad= $this->ficha_model->consulta_unidad_sf($idOp);		
+        
+		if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
+		//die(print_r('V1'));	
 		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';			
+		}else{
+		//die(print_r('V2'));	
+		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';			
+		}
+	    //$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';
+	   
 		$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
 		curl_setopt_array($ch, array(
 		CURLOPT_RETURNTRANSFER => true,

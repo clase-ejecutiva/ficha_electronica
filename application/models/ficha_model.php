@@ -172,5 +172,51 @@ class Ficha_model extends CI_Model {
 	}
 	
 	
+	function consulta_unidad_sf($sku){
+		
+     if(empty($sku)){throw new Exception("Falta SKU del Producto");}
+	 
+		$url_api='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$sku.'&action=unidad';
+	
+			 $ch = curl_init($url_api);
+			 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+
+			 //obtenemos la respuesta
+			 $ejecutivo =curl_exec($ch);
+			 curl_close($ch);
+			 	 
+	return $ejecutivo;			
+	}
+
+
+	
+	
+	function consulta_sku_op($idOp){
+		
+     if(empty($idOp)){throw new Exception("Falta Parametro");}
+	 
+		$url_api='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=OpProducto';	
+		//$url_api='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp=0062L00000Usw7iQAB&action=OpProducto';	
+			 $ch = curl_init($url_api);
+			 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+
+			 //obtenemos la respuesta
+			 $producto =curl_exec($ch);
+			 curl_close($ch);
+	$producto = json_decode($producto);		 
+	/*
+	stdClass Object
+	(
+		[name] => Herramientas para optimización y desarrollo de estrategias para redes sociales
+		[sku] => C-18
+		[sence] => false
+	)
+	*/		
+
+	return $producto->sku;			
+	}	
+	
 }
 ?>
