@@ -1,4 +1,4 @@
-﻿//Declaracion de Variables **
+﻿//Declaracion de Variables
 let data_chq = [];	
 var table_cheques;
 var CheckChqPropios;
