@@ -161,7 +161,7 @@ $('#step_1_sgte').click(function() {
 		"apellidoPaterno"   :{required:true,
 		                     textos:true,
 		                    },
-		"apellidoMaterno"  :{required:true,
+		"apellidoMaterno"  :{required:function(){ if($('#step_1_form').find('select[name="tipo_documento"]').val() == "Rut(1)"){ return true; } else {return false; }},
 		                     textos:true,
 		                     },
 		"tipo_documento"   :{required:true},
