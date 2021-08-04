@@ -1272,32 +1272,65 @@ var idOp=$('#idOp_step_3').val();
 							table_wp+='<td>'+respuesta.nombre+'</td>';
 							table_wp+='<td>'+respuesta.apellidoPaterno+'</td>';
 */		
-			
+		if(info_alum_dir.pais_residencia === 'Chile(PS-38)'){	
 			
 		//Casos de Uso individuales	
 			
 		if(CheckChqPropios && ChqPropiosMonto!=0){
-		data_chq.push({"medioPago" : "Cheques Propios","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia+' '+info_alum_dir.region_residencia,"total" :parseInt($('#id_total_cheque').val().replace(/\./g,''))});		
-		//data_chq.push({"medioPago" : "Cheques Propios","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"total" :$('#id_total_cheque').val()});
+		data_chq.push({"medioPago" : "Cheques Propios","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_residencia.split('(')[0],"total" :parseInt($('#id_total_cheque').val().replace(/\./g,''))});		
+
 		CheckChqPropios=false;
 		}			
 			
 		if(CheckDeposito && CheckDepositoMonto!=0){
-		data_chq.push({"medioPago" : "Deposito","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia+' '+info_alum_dir.region_residencia,"total" :parseInt($('#id_total_deposito').val().replace(/\./g,''))});				
-//		data_chq.push({"medioPago" : "Deposito","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"total" :$('#id_total_deposito').val()});
+		data_chq.push({"medioPago" : "Deposito","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_residencia.split('(')[0],"total" :parseInt($('#id_total_deposito').val().replace(/\./g,''))});				
+
 		CheckDeposito=false;
 		}
 		if(CheckPos && CheckPosMonto!=0){
-		data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia+' '+info_alum_dir.region_residencia,"total" :parseInt($('#id_total_pos').val().replace(/\./g,''))});						
-//		data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"total" :$('#id_total_pos').val()});
+		data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_residencia.split('(')[0],"total" :parseInt($('#id_total_pos').val().replace(/\./g,''))});						
+
 		CheckPos=false;
 		}	
 
 		if(CheckWebpay && CheckWebpayMonto!=0){
-		data_chq.push({"medioPago" : "Web Pay","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia+' '+info_alum_dir.region_residencia,"total" :parseInt($('#id_total_webpay').val().replace(/\./g,''))});								
-//		data_chq.push({"medioPago" : "Web Pay","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"total" :$('#id_total_webpay').val()});
+		data_chq.push({"medioPago" : "Web Pay","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_residencia.split('(')[0],"total" :parseInt($('#id_total_webpay').val().replace(/\./g,''))});								
+
 		CheckWebpay=false;
 		}			
+			
+	}else{
+		
+		if(CheckChqPropios && ChqPropiosMonto!=0){
+		data_chq.push({"medioPago" : "Cheques Propios","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_extrangera,"total" :parseInt($('#id_total_cheque').val().replace(/\./g,''))});		
+
+		CheckChqPropios=false;
+		}			
+			
+		if(CheckDeposito && CheckDepositoMonto!=0){
+		data_chq.push({"medioPago" : "Deposito","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_extrangera,"total" :parseInt($('#id_total_deposito').val().replace(/\./g,''))});				
+
+		CheckDeposito=false;
+		}
+		if(CheckPos && CheckPosMonto!=0){
+		data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_extrangera,"total" :parseInt($('#id_total_pos').val().replace(/\./g,''))});						
+
+		CheckPos=false;
+		}	
+
+		if(CheckWebpay && CheckWebpayMonto!=0){
+		data_chq.push({"medioPago" : "Web Pay","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_extrangera,"total" :parseInt($('#id_total_webpay').val().replace(/\./g,''))});								
+
+		CheckWebpay=false;
+		}			
+		
+		
+	}		
+			
+			
+			
+			
+			
 			
 		//Caso de Uso  con los medios de pagos simples
 		

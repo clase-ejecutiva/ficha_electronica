@@ -120,9 +120,9 @@ public function ficha_cookies($accion)
 	date_default_timezone_set("America/Santiago");	
 	$fecha=date('Y-m-d G:i:s');
 	$idOp=$this->input->get('idOp');
-
+    $testing_sf=$this->input->get('s');
 	//Cuando la Url es directa ejemplo click en http://www.claseejecutiva.com/beca-aniversario/?_anivhome&a0d1a000009P3C6
-	$data=json_encode(array('idOp'=>$idOp,'FechaCreacion'=>$fecha,'Server'=>base64_encode($_SERVER['HTTP_USER_AGENT'])));
+$data=json_encode(array('idOp'=>$idOp,'FechaCreacion'=>$fecha,'Server'=>base64_encode($_SERVER['HTTP_USER_AGENT']),'testing_sf'=>$testing_sf));
 	
 	switch($accion){ 
 		 case 'crear':
@@ -712,9 +712,20 @@ public function ErrorUpload($error,$idOp)
 			}
 				
 		   //die(print_r($data));
+		   //Parametos de testing SF
+		   	$cookie=$_COOKIE['FichaCe'];
+	        $dataCookie=json_decode($cookie);
+			
+			if(isset($dataCookie->testing_sf)){
+			$testing_sf=true;
+			}else{
+			$testing_sf='false';
+			}
+			
 			$dataForm = array (      // Account 
 			                          'idOp'=>$form_step_1->idOp,
 									  'action'=>'CrearFicha', 
+									  'testing_sf'=>str_replace(' ','false',$testing_sf),
 									  'mpago'=>'mpagoOtra',
 									  'IdCuenta'=>$form_step_1->IdCuenta,								  
 									  'IdOwner'=>$form_step_1->ejecutivaIdOwner,								  
@@ -761,7 +772,7 @@ public function ErrorUpload($error,$idOp)
 				
 				
 				$unidad= $this->ficha_model->consulta_unidad_sf($sku_producto);		
-				
+				/*
 				if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
 
 				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';			
@@ -769,7 +780,8 @@ public function ErrorUpload($error,$idOp)
 			
 				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';			
 				}				
-
+               */
+				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';	
 				
 				//$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';		
 				 $ch = curl_init($url_ce);
@@ -971,6 +983,7 @@ public function ErrorUpload($error,$idOp)
 	
         $unidad= $this->ficha_model->consulta_unidad_sf($idOp);		
         
+		/*
 		if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
 		//die(print_r('V1'));	
 		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';			
@@ -978,7 +991,8 @@ public function ErrorUpload($error,$idOp)
 		//die(print_r('V2'));	
 		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';			
 		}
-	    //$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';
+		*/
+	    $url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';
 	   
 		$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
 		curl_setopt_array($ch, array(
