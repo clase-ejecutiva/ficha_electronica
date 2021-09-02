@@ -830,7 +830,7 @@ public function ErrorUpload($error,$idOp)
 				$responceUpdate = json_decode($response);
 				
 				//debug Level 0
-				die(print_r($response));
+				//die(print_r($response));
 				//debug Level 1
 			//echo '<pre>';
 			//die(print_r($responceUpdate));
