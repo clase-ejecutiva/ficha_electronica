@@ -48,42 +48,54 @@ public function index()
 	
 	
 	if(isset($_COOKIE['FichaCe'])){
-	//if(false){
-	$cookie=$_COOKIE['FichaCe'];
-	$dataCookie=json_decode($cookie);
-	//Consultamos a la BBDD
-	$data= $this->ficha_model->consulta_etapa($idOp);
-    //Pais Residencia	
-	$residencia= $this->ficha_model->pais_residencia($idOp);
-	$form_step2=json_decode($residencia['form']);
-	 foreach($data as $key){
-		 if($key!=null ){
-			$STEP[]=$key->ETAPA;
+		//if(false){
+		$cookie=$_COOKIE['FichaCe'];
+		$dataCookie=json_decode($cookie);
+		//Consultamos a la BBDD
+		$data= $this->ficha_model->consulta_etapa($idOp);
+	    //Pais Residencia	
+		$residencia= $this->ficha_model->pais_residencia($idOp);
+		$form_step2=json_decode($residencia['form']);
+		 foreach($data as $key){
+			 if($key!=null ){
+				$STEP[]=$key->ETAPA;
+			 }
 		 }
-	 }
-	$step=array('STEP'=>end($STEP));
-	//print_r($pais);
-	$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=buscarOp';			
-	$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
-	curl_setopt_array($ch, array(
-	CURLOPT_RETURNTRANSFER => true,
-	CURLOPT_URL =>  $url_ce));
-	$response = curl_exec($ch); 		
-	curl_close($ch);
-	$jsondecode = json_decode($response);	
-			
-	//die(print_r($jsondecode));
-	if($idOp){
-	 $this->load->view('v3',array('error' =>$error ,'jsondecode'=>$jsondecode,'idOp'=>$idOp,'step'=>$step,'form2'=>$form_step2,'dolar_ce'=>$jsondecode->dataOp->fields->Valor_Dolar__c));
-	}else{
-	 $this->load->view('v3', array('error' =>$error ,'jsondecode'=>false,'idOp'=>$idOp));
-	}		
+		$step=array('STEP'=>end($STEP));
+		//print_r($pais);
+		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=buscarOp';			
+		$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
+		curl_setopt_array($ch, array(
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_URL =>  $url_ce));
+		$response = curl_exec($ch); 		
+		curl_close($ch);
+		$jsondecode = json_decode($response);	
+				
+		//die(print_r($jsondecode));
+		if($idOp){
+		 $this->load->view('v3',array('error' =>$error ,'jsondecode'=>$jsondecode,'idOp'=>$idOp,'step'=>$step,'form2'=>$form_step2,'dolar_ce'=>$jsondecode->dataOp->fields->Valor_Dolar__c));
+		}else{
+		 $this->load->view('v3', array('error' =>$error ,'jsondecode'=>false,'idOp'=>$idOp));
+		}		
 
 	
 	}else{
 	
 	
-		$this->ficha_cookies('crear');
+		$data= $this->ficha_model->consulta_etapa($idOp);
+	    //Pais Residencia	
+		$residencia= $this->ficha_model->pais_residencia($idOp);
+
+		$form_step2=json_decode($residencia['form']);
+
+		 foreach($data as $key){
+			 if($key!=null ){
+				$STEP[]=$key->ETAPA;
+			 }
+		 }
+		$step=array('STEP'=>end($STEP));
+
 		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=buscarOp';			
 		$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
 		curl_setopt_array($ch, array(
@@ -93,15 +105,15 @@ public function index()
 		curl_close($ch);
 		$jsondecode = json_decode($response);	
 
-        //Marcar como ficha creada
 
+       //Verificamos la etapa de la ficha
 
-		
-		//die(print_r($jsondecode));
-		if($idOp){
-		 $this->load->view('v3',array('error' =>$error ,'jsondecode'=>$jsondecode,'idOp'=>$idOp));
+		if($step){
+		// $this->load->view('v3',array('error' =>$error ,'jsondecode'=>$jsondecode,'idOp'=>$idOp));
+		 $this->load->view('v3',array('error' =>$error ,'jsondecode'=>$jsondecode,'idOp'=>$idOp,'step'=>$step,'form2'=>$form_step2,'dolar_ce'=>$jsondecode->dataOp->fields->Valor_Dolar__c));			
 		}else{
-		 $this->load->view('v3', array('error' =>$error ,'jsondecode'=>false,'idOp'=>$idOp));
+		 //$this->load->view('v3', array('error' =>$error ,'jsondecode'=>false,'idOp'=>$idOp));
+		$this->load->view('v3',array('error' =>$error ,'jsondecode'=>$jsondecode,'idOp'=>$idOp));	
 		}
 		
 		
@@ -120,7 +132,14 @@ public function ficha_cookies($accion)
 	date_default_timezone_set("America/Santiago");	
 	$fecha=date('Y-m-d G:i:s');
 	$idOp=$this->input->get('idOp');
-    $testing_sf=$this->input->get('s');
+	
+	if($this->input->get('s')){
+	$testing_sf=true;	
+	}else{
+	$testing_sf=false;	
+	}
+	
+   // $testing_sf=$this->input->get('s');
 	//Cuando la Url es directa ejemplo click en http://www.claseejecutiva.com/beca-aniversario/?_anivhome&a0d1a000009P3C6
 $data=json_encode(array('idOp'=>$idOp,'FechaCreacion'=>$fecha,'Server'=>base64_encode($_SERVER['HTTP_USER_AGENT']),'testing_sf'=>$testing_sf));
 	
@@ -169,13 +188,13 @@ public function ErrorUpload($error,$idOp)
 
    //Funciones que guardan los Estados de inscripsion
 	public function step_1(){
-	$this->ficha_cookies('borrar');		
+	//$this->ficha_cookies('borrar');		
 	date_default_timezone_set("America/Santiago");	
 	$Post=$this->input->post();
 	$fecha=date('Y-m-d G:i:s');
 	$status=$this->ficha_model->ingresar_step_1($Post['idOp'],json_encode($Post),$fecha);	
 		if($status){
-		$this->ficha_cookies('crear');	
+	//	$this->ficha_cookies('crear');	
 		echo json_encode(array('status'=>'ok','bbdd'=>$status),true);	
 		}else{
 		echo json_encode(array('status'=>'error','bbdd'=>$status),true);		
@@ -183,13 +202,13 @@ public function ErrorUpload($error,$idOp)
 	}
 
 	public function step_2(){
-	$this->ficha_cookies('borrar');		
+	//$this->ficha_cookies('borrar');		
 	date_default_timezone_set("America/Santiago");	
 	$Post=$this->input->post();
 	$fecha=date('Y-m-d G:i:s');
 	$status=$this->ficha_model->ingresar_step_2($Post['idOp'],json_encode($Post),$fecha);	
 		if($status){
-		$this->ficha_cookies('crear');		
+		//$this->ficha_cookies('crear');		
 		echo json_encode(array('status'=>'ok','bbdd'=>$status),true);	
 		}else{
 		echo json_encode(array('status'=>'error','bbdd'=>$status),true);		
@@ -197,13 +216,13 @@ public function ErrorUpload($error,$idOp)
 	}
 
 	public function step_3(){
-	$this->ficha_cookies('borrar');		
+	//$this->ficha_cookies('borrar');		
 	date_default_timezone_set("America/Santiago");	
 	$Post=$this->input->post();
 	$fecha=date('Y-m-d G:i:s');
 	$status=$this->ficha_model->ingresar_step_3($Post['idOp'],json_encode($Post),$fecha);	
 		if($status){
-		$this->ficha_cookies('crear');		
+		//$this->ficha_cookies('crear');		
 		echo json_encode(array('status'=>'ok','bbdd'=>$status),true);	
 		}else{
 		echo json_encode(array('status'=>'error','bbdd'=>$status),true);		
@@ -211,13 +230,13 @@ public function ErrorUpload($error,$idOp)
 	}	
 
 	public function step_4(){
-	$this->ficha_cookies('borrar');		
+	//$this->ficha_cookies('borrar');		
 	date_default_timezone_set("America/Santiago");	
 	$Post=$this->input->post();
 	$fecha=date('Y-m-d G:i:s');
 	$status=$this->ficha_model->ingresar_step_4($Post['idOp'],json_encode($Post),$fecha);
 		if($status){
-		$this->ficha_cookies('crear');		
+		//$this->ficha_cookies('crear');		
 		echo json_encode(array('status'=>'ok','bbdd'=>$status),true);	
 		}else{
 		echo json_encode(array('status'=>'error','bbdd'=>$status),true);		
@@ -268,7 +287,7 @@ public function ErrorUpload($error,$idOp)
    }
 	
     public function do_upload()
-	{	
+	{			
 		$Post=$this->input->post();
 		$dataForm=$this->ficha_model->consulta_etapa($Post['idOp']);
 		
@@ -631,6 +650,7 @@ public function ErrorUpload($error,$idOp)
 				$mpago='Depósito(1)';
 				$mpagoFicha=1;
 				$tpersona='Natural(1)';
+				$tipo_identificacion='Cédula de Identidad(1)';
 			}
 			if($v->medioPago==='Pago en Oficina')
 			{
@@ -713,12 +733,15 @@ public function ErrorUpload($error,$idOp)
 				
 		   //die(print_r($data));
 		   //Parametos de testing SF
-		   	$cookie=$_COOKIE['FichaCe'];
-	        $dataCookie=json_decode($cookie);
+		   	$cookie_aux=$_COOKIE['FichaCe'];
+	        $dataCookie_aux=json_decode($cookie_aux);
 			
-			if(isset($dataCookie->testing_sf)){
+			
+			if($dataCookie_aux->testing_sf == 1){
+			//	die(print_r($dataCookie_aux));
 			$testing_sf=true;
 			}else{
+				//die(print_r($dataCookie_aux));
 			$testing_sf='false';
 			}
 			
@@ -762,6 +785,7 @@ public function ErrorUpload($error,$idOp)
 			
 		}
 		//die(print_r($dataForm));
+		
 				foreach ( $dataForm as $key => $value) {
 				$post_items[] = $key . '=' . $value;
 			   }			
@@ -770,20 +794,25 @@ public function ErrorUpload($error,$idOp)
 				
 				$sku_producto = $this->ficha_model->consulta_sku_op($form_step_1->idOp);
 				
+				//die(print_r($form_step_1->idOp));
 				
 				$unidad= $this->ficha_model->consulta_unidad_sf($sku_producto);		
-				/*
-				if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
-
-				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';			
-				}else{
-			
-				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';			
-				}				
-               */
-				$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';	
 				
-				//$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';		
+				//die(print_r($unidad));
+				
+				if($testing_sf){
+					if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
+
+					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';			
+					}else{
+				
+					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';			
+					}				
+				}else{  
+				   
+					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';	
+				}	
+				//die(print_r($url_ce));	
 				 $ch = curl_init($url_ce);
 				 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
 				 curl_setopt($ch, CURLOPT_USERAGENT,"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
@@ -801,7 +830,7 @@ public function ErrorUpload($error,$idOp)
 				$responceUpdate = json_decode($response);
 				
 				//debug Level 0
-				//die(print_r($response));
+				die(print_r($response));
 				//debug Level 1
 			//echo '<pre>';
 			//die(print_r($responceUpdate));
@@ -977,23 +1006,27 @@ public function ErrorUpload($error,$idOp)
 
 
 	public function malla()
-	{
-		
+	{		
 		$idOp=$this->input->get('idOp');
-	
+		$cookie=$_COOKIE['FichaCe'];
+	    $dataCookie=json_decode($cookie);	
         $unidad= $this->ficha_model->consulta_unidad_sf($idOp);		
+
+        //die(print_r($dataCookie));
         
-		/*
-		if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
-		//die(print_r('V1'));	
-		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';			
-		}else{
-		//die(print_r('V2'));	
-		$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';			
+		if($dataCookie->testing_sf){
+			if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
+			//die(print_r('V1'));	
+			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';			
+			}else{
+			//die(print_r('V2'));	
+			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';			
+			}
+		}else{	
+			
+			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';
 		}
-		*/
-	    $url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';
-	   
+		
 		$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
 		curl_setopt_array($ch, array(
 		CURLOPT_RETURNTRANSFER => true,
@@ -1004,13 +1037,6 @@ public function ErrorUpload($error,$idOp)
 		
 		echo $response;
 		
-	/*
-		if($jsondecode){
-		 $this->load->view('testing',array('error' =>$error ,'malla'=>$response,'idOp'=>$idOp));
-		}else{
-		 $this->load->view('testing', array('error' =>$error ,'malla'=>false,'idOp'=>$idOp));
-		} 
-	 */	
 	}
 
 public function back_step()
