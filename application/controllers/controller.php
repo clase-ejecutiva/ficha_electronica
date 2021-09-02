@@ -82,6 +82,7 @@ public function index()
 	
 	}else{
 	
+	$this->ficha_cookies('crear');
 	
 		$data= $this->ficha_model->consulta_etapa($idOp);
 	    //Pais Residencia	
