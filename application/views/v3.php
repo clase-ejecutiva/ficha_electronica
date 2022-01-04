@@ -266,7 +266,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
 					}else{
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
-					echo "<td>".'<button type="button"   class="btn btn-warning d "  onclick="malla_diplo('."'".$k->ProductCode."'".')" >Ver</button>'."</td>";
+					echo "<td>".'<button type="button"   class="btn btn-warning d "  onclick="malla_diplo('."'".$k->ProductCode."'".', '."'".$idOp."'".')" >Ver</button>'."</td>";
 					echo "</tr>";
 					}
 					//data-toggle="modal" data-target="#ModalMalla"
@@ -722,7 +722,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
 					}else{
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
-					echo "<td>".'<button type="button"   class="btn btn-warning d "  onclick="malla_diplo('."'".$k->ProductCode."'".')" >Ver</button>'."</td>";
+					echo "<td>".'<button type="button"   class="btn btn-warning d "  onclick="malla_diplo('."'".$k->ProductCode."'".', '."'".$idOp."'".')" >Ver</button>'."</td>";
 					echo "</tr>";
 					}
 					//data-toggle="modal" data-target="#ModalMalla"
@@ -1177,7 +1177,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 							echo "<td><font SIZE=2>".$k->Name."</font></td>";
 							}else{
 							echo "<td><font SIZE=2>".$k->Name."</font></td>";
-							echo "<td>".'<button type="button"   class="btn btn-warning d "  onclick="malla_diplo('."'".$k->ProductCode."'".')" >Ver</button>'."</td>";
+							echo "<td>".'<button type="button"   class="btn btn-warning d " onclick="malla_diplo('."'".$k->ProductCode."'".', '."'".$idOp."'".')" >Ver</button>'."</td>";
 							echo "</tr>";
 							}
 							//data-toggle="modal" data-target="#ModalMalla"
@@ -1925,7 +1925,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 					  <th><font SIZE=2>Malla</font></th>
 
 					</tr>
-				  </thead>
+				  </thead> 
 				  <tbody >
 			<?php
 				foreach ($jsondecode->productos as $k){
@@ -1935,7 +1935,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
 					}else{
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
-					echo "<td>".'<button type="button"   class="btn btn-warning d "  onclick="malla_diplo('."'".$k->ProductCode."'".')" >Ver</button>'."</td>";
+					echo "<td>".'<button type="button"   class="btn btn-warning d " onclick="malla_diplo('."'".$k->ProductCode."'".', '."'".$idOp."'".')" >Ver</button>'."</td>";
 					echo "</tr>";
 					}
 					//data-toggle="modal" data-target="#ModalMalla"

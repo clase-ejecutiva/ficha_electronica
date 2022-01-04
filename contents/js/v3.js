@@ -614,12 +614,13 @@ $('body').append(divValue);
 
 
 
-function malla_diplo(sku){	
+function malla_diplo(sku,idOp){	
 //$('#malla').attr('data-toggle','modal');
-var sku=sku;	
+var sku=sku;
+var idOp=idOp;		
 
  $.ajax({
-                url :base_url+'/index.php/controller/malla?idOp='+sku,
+                url :base_url+'/index.php/controller/malla?idOp='+sku+'&sf='+idOp,
                 type : "GET",
                 data :sku,
                 success: function(data){

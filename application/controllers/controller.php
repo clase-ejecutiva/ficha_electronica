@@ -24,10 +24,12 @@ class Controller extends CI_Controller {
 	  //var_dump($this->email->print_debugger());
 	
 	  //http://devficha.claseejecutiva.com/index.php/controller/test
-	  $sku_producto = $this->ficha_model->consulta_sku_op('0062L00000Usw7iQAB');
-	  $data= $this->ficha_model->consulta_etapa('0062L00000TuZrfQAF');
+	  //$sku_producto = $this->ficha_model->consulta_sku_op('0062L00000Usw7iQAB');
+	  //$data= $this->ficha_model->consulta_etapa('0062L00000TuZrfQAF');
+  	$idOp=$this->input->get('idOp');
+  	$data= $this->ficha_model->consulta_etapa($idOp);
 	  echo '<pre>';
-	  die(print_r($sku_producto));
+	  die(print_r($data));
   } 
 
 public function index()
@@ -396,7 +398,7 @@ public function ErrorUpload($error,$idOp)
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Transferencia Bancaria Internacional(8)',
-									  'mpagoFicha'=>'8',
+									  'mpagoFicha'=>'Transferencia Bancaria Internacional(8)',
 									  'tipo_p'=>'Natural(1)',
 									  'RUT__c'=>$form_step_1->dni,
 									  'Nombre_del_Pagador__c'=>$form_step_1->nombre,
@@ -447,7 +449,7 @@ public function ErrorUpload($error,$idOp)
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Pago en Cuotas(5)',
-									  'mpagoFicha'=>'5',
+									  'mpagoFicha'=>'Pago en Cuotas(5)',
 									  'tipo_p'=>'Natural(1)',
 									  'RUT__c'=>$form_step_1->dni,
 									  'Nombre_del_Pagador__c'=>$form_step_1->nombre,
@@ -502,7 +504,7 @@ public function ErrorUpload($error,$idOp)
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Cheque(2)',
-									  'mpagoFicha'=>'2',
+									  'mpagoFicha'=>'Cheque(2)',
 									  'tipo_p'=>'Natural(1)',
 									  'RUT__c'=>$form_step_1->dni,
 									  'Nombre_del_Pagador__c'=>$form_step_1->nombre,
@@ -555,7 +557,7 @@ public function ErrorUpload($error,$idOp)
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'WebPay(7)',
-									  'mpagoFicha'=>'7',
+									  'mpagoFicha'=>'WebPay(7)',
 									  'tipo_p'=>'Natural(1)',
 									  'RUT__c'=>$form_step_1->dni,
 									  'Nombre_del_Pagador__c'=>$form_step_1->nombre,
@@ -608,7 +610,7 @@ public function ErrorUpload($error,$idOp)
 									  //Fin Oportunidad
                                       //Ficha Electronica
 									  'mpago'=>'Orden de Compra(3)',
-									  'mpagoFicha'=>'3',
+									  'mpagoFicha'=>'Orden de Compra(3)',
 									  'tipo_p'=>'Juridica(2)',
 									  'RUT__c'=>$tablaOC[0]->rut,
 									  'Nombre_del_Pagador__c'=>$tablaOC[0]->datoPagador,
@@ -643,32 +645,32 @@ public function ErrorUpload($error,$idOp)
 			if($v->medioPago==='Cheques Propios')
 			{
 				$mpago='Cheque(2)';
-				$mpagoFicha=2;
+				$mpagoFicha='Cheque(2)';
 				$tpersona='Natural(1)';
 			}
 			if($v->medioPago==='Deposito')
 			{
 				$mpago='Depósito(1)';
-				$mpagoFicha=1;
+				$mpagoFicha='Depósito(1)';
 				$tpersona='Natural(1)';
 				$tipo_identificacion='Cédula de Identidad(1)';
 			}
 			if($v->medioPago==='Pago en Oficina')
 			{
 				$mpago='POS(6)';
-				$mpagoFicha=6;
+				$mpagoFicha='POS(6)';
 				$tpersona='Natural(1)';
 			}
 			if($v->medioPago==='Web Pay')
 			{
 				$mpago='WebPay(7)';
-				$mpagoFicha=7;
+				$mpagoFicha='WebPay(7)';
 				$tpersona='Natural(1)';
 			}
 			if($v->medioPago==='Cheques Tercero')
 			{
 				$mpago='Cheque(2)';
-				$mpagoFicha=2;
+				$mpagoFicha='Cheque(2';
 				if($v->apellidoP!=''){
 					$tpersona='Natural(1)';
 					}else{
@@ -678,7 +680,7 @@ public function ErrorUpload($error,$idOp)
 			if($v->medioPago==='Orden de Compra')
 			{
 				$mpago='Orden de Compra(3)';
-				$mpagoFicha=3;
+				$mpagoFicha='Orden de Compra(3)';
 				$tpersona='Juridica(2)';
 				/*
 				$datosOC=array(
@@ -745,6 +747,23 @@ public function ErrorUpload($error,$idOp)
 				//die(print_r($dataCookie_aux));
 			$testing_sf='false';
 			}
+
+
+           
+           /* FIX PARA TAV*/
+             $url_tav='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$form_step_1->idOp.'&action=TAV'; 
+			 $ch = curl_init($url_erp);//URL A ENVIAR EL CONTENIDO
+			 curl_setopt_array($ch, array(
+			 CURLOPT_RETURNTRANSFER =>true,
+			 CURLOPT_SSL_VERIFYHOST =>false,
+			 CURLOPT_URL =>  $url_tav));
+			 $resp = curl_exec($ch); 
+			 $resp_tav= json_decode($resp);
+			 curl_close($ch);	
+
+
+
+
 			
 			$dataForm = array (      // Account 
 			                          'idOp'=>$form_step_1->idOp,
@@ -779,6 +798,8 @@ public function ErrorUpload($error,$idOp)
 									  'url_descarga'=>base_url().'index.php/controller/descargar_archivo?f='.$form_step_1->idOp,									  
 									  //Fin Oportunidad
 									  'data_mpagos'=>json_encode($data),
+									  //TAV
+									  'Curso_Tav__c'=>$resp_tav->Curso_Tav__c,
 									  'productos'=>$form_step_1->productos
 									  );	
 							  
@@ -799,9 +820,9 @@ public function ErrorUpload($error,$idOp)
 				
 				$unidad= $this->ficha_model->consulta_unidad_sf($sku_producto);		
 				
-				//die(print_r($unidad));
+				//die(print_r($unidad)); $dataCookie->testing_sf == true
 				
-				if($testing_sf){
+				if($dataCookie_aux->testing_sf == true){
 					if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
 
 					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';			
@@ -1008,24 +1029,46 @@ public function ErrorUpload($error,$idOp)
 
 	public function malla()
 	{		
-		$idOp=$this->input->get('idOp');
+		$sku=$this->input->get('idOp');
 		$cookie=$_COOKIE['FichaCe'];
 	    $dataCookie=json_decode($cookie);	
-        $unidad= $this->ficha_model->consulta_unidad_sf($idOp);		
+        $unidad= $this->ficha_model->consulta_unidad_sf($sku);		
+        $idOp = $this->input->get('sf');
 
-        //die(print_r($dataCookie));
+
+           /* FIX PARA TAV*/
+             $url_tav='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=TAV'; 
+			 $ch = curl_init($url_erp);//URL A ENVIAR EL CONTENIDO
+			 curl_setopt_array($ch, array(
+			 CURLOPT_RETURNTRANSFER =>true,
+			 CURLOPT_SSL_VERIFYHOST =>false,
+			 CURLOPT_URL =>  $url_tav));
+			 $resp = curl_exec($ch); 
+			 $resp_tav= json_decode($resp);
+			 curl_close($ch);	        
+
+        //die(print_r($dataCookie)); $dataCookie_aux->testing_sf == 1
         
-		if($dataCookie->testing_sf){
+		if($dataCookie->testing_sf == true){
 			if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
-			//die(print_r('V1'));	
-			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';			
+				
+			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$sku.'&action=malla';			
 			}else{
-			//die(print_r('V2'));	
-			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';			
+//die(print_r($resp_tav));
+             // if($resp_tav->Curso_Tav__c == 'true'){
+             $url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$sku.'&action=malla&tav='.$resp_tav->Curso_Tav__c;
+               // die(print_r($resp_tav));
+			 	//}else{
+			    //$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';
+			      // die(print_r($url_ce));
+			 //	}
+
+			
+	
 			}
 		}else{	
-			
-			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$idOp.'&action=malla';
+			//die(print_r('V3'));	
+			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$sku.'&action=malla';
 		}
 		
 		$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
