@@ -761,9 +761,11 @@ public function ErrorUpload($error,$idOp)
 			 $resp_tav= json_decode($resp);
 			 curl_close($ch);	
 
+			$sku_producto = $this->ficha_model->consulta_sku_op($form_step_1->idOp);
+				
+			$unidad= $this->ficha_model->consulta_unidad_sf($sku_producto);
 
-
-
+            $tipoProducto= $this->ficha_model->consulta_tipo_producto_sf($sku_producto); 
 			
 			$dataForm = array (      // Account 
 			                          'idOp'=>$form_step_1->idOp,
@@ -800,6 +802,7 @@ public function ErrorUpload($error,$idOp)
 									  'data_mpagos'=>json_encode($data),
 									  //TAV
 									  'Curso_Tav__c'=>$resp_tav->Curso_Tav__c,
+                                      'tipoProducto'=>$tipoProducto,									  
 									  'productos'=>$form_step_1->productos
 									  );	
 							  
@@ -812,24 +815,18 @@ public function ErrorUpload($error,$idOp)
 				$post_items[] = $key . '=' . $value;
 			   }			
 				$post_string = implode ('&', $post_items);	
-
-				
-				$sku_producto = $this->ficha_model->consulta_sku_op($form_step_1->idOp);
-				
-				//die(print_r($form_step_1->idOp));
-				
-				$unidad= $this->ficha_model->consulta_unidad_sf($sku_producto);		
+		
 				
 				//die(print_r($unidad)); $dataCookie->testing_sf == true
 				
 				if($dataCookie_aux->testing_sf == true){
-					if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
+					//if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
 
-					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';			
-					}else{
+				//	$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';			
+				//	}else{
 				
-					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php';			
-					}				
+					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV3.php';			
+				//	}				
 				}else{  
 				   
 					$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php';	
@@ -1037,7 +1034,7 @@ public function ErrorUpload($error,$idOp)
 
 
            /* FIX PARA TAV*/
-             $url_tav='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=TAV'; 
+             $url_tav='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV3.php?idOp='.$idOp.'&action=TAV'; 
 			 $ch = curl_init($url_erp);//URL A ENVIAR EL CONTENIDO
 			 curl_setopt_array($ch, array(
 			 CURLOPT_RETURNTRANSFER =>true,
@@ -1048,27 +1045,16 @@ public function ErrorUpload($error,$idOp)
 			 curl_close($ch);	        
 
         //die(print_r($dataCookie)); $dataCookie_aux->testing_sf == 1
+
+	 $tipoProducto= $this->ficha_model->consulta_tipo_producto_sf($sku); 	 
         
 		if($dataCookie->testing_sf == true){
-			if($unidad == 'Teleduc (E-Commerce)' or $unidad == 'EnglishUC' ){
-				
-			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$sku.'&action=malla';			
-			}else{
-//die(print_r($resp_tav));
-             // if($resp_tav->Curso_Tav__c == 'true'){
-             $url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$sku.'&action=malla&tav='.$resp_tav->Curso_Tav__c;
-               // die(print_r($resp_tav));
-			 	//}else{
-			    //$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$idOp.'&action=malla';
-			      // die(print_r($url_ce));
-			 //	}
+           
+        $url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV3.php?idOp='.$sku.'&action=malla&tav='.$resp_tav->Curso_Tav__c.'&tipo='.urlencode($tipoProducto);
 
-			
-	
-			}
 		}else{	
 			//die(print_r('V3'));	
-			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$sku.'&action=malla';
+			$url_ce='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcion.php?idOp='.$sku.'&action=malla';
 		}
 		
 		$ch = curl_init($url_ce);//URL A ENVIAR EL CONTENIDO
@@ -1079,7 +1065,9 @@ public function ErrorUpload($error,$idOp)
 		curl_close($ch);
 		//$jsondecode = json_decode($response);
 		
-		echo $response;
+		echo $response;  
+
+		//echo $url_ce;
 		
 	}
 

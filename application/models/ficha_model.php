@@ -190,6 +190,25 @@ class Ficha_model extends CI_Model {
 	}
 
 
+
+	function consulta_tipo_producto_sf($sku){
+		
+     if(empty($sku)){throw new Exception("Falta SKU del Producto");}
+	 
+		$url_api='https://ws2.diplomadosuc.cl/soapSF/ws/pre_inscripcionV2.php?idOp='.$sku.'&action=tipoProducto';
+	
+			 $ch = curl_init($url_api);
+			 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+
+			 //obtenemos la respuesta
+			 $tipoProducto =curl_exec($ch);
+			 curl_close($ch);
+			 	 
+	return $tipoProducto;			
+	}
+
+
 	
 	
 	function consulta_sku_op($idOp){

@@ -262,7 +262,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 				foreach ($jsondecode->productos as $k){
 					$pos=strpos($k->ProductCode,'C-');
 					echo "<tr>";	
-					if($pos!==false){
+					if(false){
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
 					}else{
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
@@ -718,7 +718,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 				foreach ($jsondecode->productos as $k){
 					$pos=strpos($k->ProductCode,'C-');
 					echo "<tr>";	
-					if($pos!==false){
+					if(false){
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
 					}else{
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
@@ -1173,7 +1173,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 						foreach ($jsondecode->productos as $k){
 							$pos=strpos($k->ProductCode,'C-');
 							echo "<tr>";	
-							if($pos!==false){
+							if(false){
 							echo "<td><font SIZE=2>".$k->Name."</font></td>";
 							}else{
 							echo "<td><font SIZE=2>".$k->Name."</font></td>";
@@ -1931,7 +1931,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 				foreach ($jsondecode->productos as $k){
 					$pos=strpos($k->ProductCode,'C-');
 					echo "<tr>";	
-					if($pos!==false){
+					if(false){
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
 					}else{
 					echo "<td><font SIZE=2>".$k->Name."</font></td>";
