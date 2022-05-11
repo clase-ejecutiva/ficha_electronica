@@ -1224,7 +1224,7 @@ var idOp=$('#idOp_step_3').val();
 		$('#id_check_ch_propios').change(function(){ if($("#id_check_ch_propios").is(":checked")){$('#id_total_cheque').attr('readonly', false);}else{$('#id_total_cheque').attr('readonly', true);   }});
 		$('#id_check_ch_terceros').change(function(){ if($("#id_check_ch_terceros").is(":checked")){$('#id_total_cheque_terceros').attr('readonly', false);}else{$('#id_total_cheque_terceros').attr('readonly', true);}});
 		$('#id_check_deposito').change(function(){ if($("#id_check_deposito").is(":checked")){$('#id_total_deposito').attr('readonly', false);}else{$('#id_total_deposito').attr('readonly', true);}});
-		$('#id_check_pos').change(function(){ if($("#id_check_pos").is(":checked")){$('#id_total_pos').attr('readonly', false);}else{$('#id_total_pos').attr('readonly', true);}});
+		//$('#id_check_pos').change(function(){ if($("#id_check_pos").is(":checked")){$('#id_total_pos').attr('readonly', false);}else{$('#id_total_pos').attr('readonly', true);}});
 		$('#id_check_webpay').change(function(){ if($("#id_check_webpay").is(":checked")){$('#id_total_webpay').attr('readonly', false);}else{$('#id_total_webpay').attr('readonly', true);}});
 		$('#id_check_oc_empresa').change(function(){ if($("#id_check_oc_empresa").is(":checked")){$('#id_total_oc_empresa').attr('readonly', false);}else{$('#id_total_oc_empresa').attr('readonly', true);}});
 	
@@ -1239,7 +1239,7 @@ var idOp=$('#idOp_step_3').val();
 	 CheckDeposito =$('#id_check_deposito').is(":checked");
 	 CheckDepositoMonto =parseInt($('#id_total_deposito').val().replace(/\./g,''));
 	 CheckPos=$('#id_check_pos').is(":checked");
-	 CheckPosMonto=parseInt($('#id_total_pos').val().replace(/\./g,''));
+	// CheckPosMonto=parseInt($('#id_total_pos').val().replace(/\./g,''));
 	 CheckWebpay=$('#id_check_webpay').is(":checked");
 	 CheckWebpayMonto=parseInt($('#id_total_webpay').val().replace(/\./g,''));
 	 CheckOC=$('#id_check_oc_empresa').is(":checked");
@@ -1289,7 +1289,7 @@ var idOp=$('#idOp_step_3').val();
 		CheckDeposito=false;
 		}
 		if(CheckPos && CheckPosMonto!=0){
-		data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_residencia.split('(')[0],"total" :parseInt($('#id_total_pos').val().replace(/\./g,''))});						
+	//	data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_residencia.split('(')[0],"total" :parseInt($('#id_total_pos').val().replace(/\./g,''))});						
 
 		CheckPos=false;
 		}	
@@ -1314,7 +1314,7 @@ var idOp=$('#idOp_step_3').val();
 		CheckDeposito=false;
 		}
 		if(CheckPos && CheckPosMonto!=0){
-		data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_extrangera,"total" :parseInt($('#id_total_pos').val().replace(/\./g,''))});						
+	//	data_chq.push({"medioPago" : "Pago en Oficina","rut" :info_alum.dni,"datoPagador" :info_alum.nombre+' '+info_alum.apellidoPaterno ,"nombre":info_alum.nombre,"apellidoP":info_alum.apellidoPaterno,"apellidoM":info_alum.apellidoMaterno,"direccion":info_alum_dir.dir+' '+info_alum_dir.dir_num+' '+info_alum_dir.pais_residencia.split('(')[0]+' '+info_alum_dir.region_extrangera,"total" :parseInt($('#id_total_pos').val().replace(/\./g,''))});						
 
 		CheckPos=false;
 		}	
