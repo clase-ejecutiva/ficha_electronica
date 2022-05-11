@@ -587,8 +587,8 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 			<div class="col-md-3">
 			   <Select type="text" name="genero" id="genero" class="form-control" placeholder="Genero"  >
 			     <option value="" selected>Seleccionar</option>
-                 <option value='M(2)'>Masculino</option>
-                 <option value='F(1)'>Femenino</option>
+                 <option value='M(1)'>Masculino</option>
+                 <option value='F(2)'>Femenino</option>
 			   </Select>
 		    </div>
         </div>
@@ -1538,7 +1538,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 				
 				</div>
 				
-								
+						<!--		
 				<div class="form-group row">
 				<div  class="col-md-1 field-label-responsive"><br>	</div>
 				<div  class="col-md-1 field-label-responsive">		
@@ -1554,7 +1554,7 @@ mpagodolar='<?php echo $jsondecode->dataOp->fields->Extranjero__c;?>';
 				</div>
 				
 				</div>
-				
+				-->
 								
 				<div class="form-group row">
 				<div  class="col-md-1 field-label-responsive"><br>	</div>
